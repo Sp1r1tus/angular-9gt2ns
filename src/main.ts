@@ -4,24 +4,29 @@ import { CommonModule } from '@angular/common';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'my-app',
   standalone: true,
-  imports: [CommonModule, MatDialogModule],
+  imports: [CommonModule, MatDialogModule, MatIconModule],
   template: `
-    <h1>Hello from {{name}}!</h1>
+    <h1>Why are the radio's not disabled?</h1>
    <button (click)="openDialog()">open modal</button>
   `,
 })
 export class App {
-  constructor(private dialogService: MatDialog) {}
-  name = 'Angular';
+  constructor(public dialog: MatDialog) {}
+
   openDialog() {
-    const dialogRef = this.dialogService.open(DialogComponent);
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        message: 'Hello from App!',
+      },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      alert('close');
+      console.log(`Dialog result: ${result}`);
     });
   }
 }

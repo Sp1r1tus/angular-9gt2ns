@@ -1,4 +1,16 @@
-<div class="dialog-class">
-  <div>dialog</div>
-  <button type="button" (click)="ok()">Ok</button>
+<div>
+  <button (click)="closeAlert()">close</button>
+  <p>{{ data.message }}</p>
+  <form [formGroup]="myForm">
+    <div *ngFor="let nbr of numbersArr; index as i">
+      <input
+        formControlName="numbers"
+        type="radio"
+        id="{{ nbr.id }}"
+        [value]="nbr.id"
+        [attr.disabled]="!nbr.enabled ? true : null"
+      />
+      <label for="{{ nbr.id }}">{{ nbr.id }}</label>
+    </div>
+  </form>
 </div>
