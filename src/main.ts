@@ -19,6 +19,10 @@ export class App {
   name = 'Angular';
   openDialog() {
     const dialogRef = this.dialogService.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      alert('close');
+    });
   }
 }
 
